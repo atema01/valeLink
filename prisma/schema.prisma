@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Link {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  senderName   String
+  receiverName String
+  photoUrl     String?
+  backgroundId String
+  message      String
+  buttonStyle  String
+  template     String
+  metadata     Json?
+  answer       String?
+  answeredAt   DateTime?
+  answeredMeta Json?
+  viewCount    Int      @default(0)
+  lastViewedAt DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
